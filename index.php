@@ -1,24 +1,23 @@
-<?php
-//connect to the database 
-require_once ("./connect.php");
-//prepaare the SQL statement 
-$SQL = "SELECT `car_info_id` FROM `car_info`WHERE";
-//execute the SQL statement using the query() method 
-$result = $db->query($sql);
-//check for SQL error 
-// checking error using sql error()
-if($db->error){
-    exit("SQL error");
-}
-//UNPACKING the statement
-while($array = $result->fetch_array()) {
-    var_dump($array);
-}
-//check number of rows retrived
-echo "number of results: ".$result->num_rows.". <br/>";
+<?php 
 
-//free method and disconnect from database
-$result->free();
-$db-> close();
+$ip_address = $_SERVER ["REMOTE_ADDR"] ;
+
+$http_client_ip = $_SERVER ["HTTP_CLIENT_IP"] ;
+
+$http_x_forwarded_for = $_SERVER ["HTTP_X_FORWARDED_FOR"] ;
+
+$remote_addr = $_SERVER ["REMOTE_ADDR"] ;
+
+if (!empty ($http_client_ip)) {
+    $ip_address = $http_client_ip ;
+
+}else if (!empty ($http_x_forwarded_for)) {
+    $ip_address = $http_x_forwarded_for ;
+
+} else {
+    $ip_address = $remote_addr ;
+}
+
+echo $ip_address ;
 
 ?>

@@ -1,23 +1,29 @@
 <?php 
+$string = 'password';
+$string_harsh =md5 ($tring);
 
-$ip_address = $_SERVER ["REMOTE_ADDR"] ;
+echo $string_hash;
 
-$http_client_ip = $_SERVER ["HTTP_CLIENT_IP"] ;
+<form action ="index.php" method="POST">
+Name <input type="text" name="user_id">
+<br>
+Password <input type="password" name="user_password">
+<input type = "submit" value="submit">
+</form>
 
-$http_x_forwarded_for = $_SERVER ["HTTP_X_FORWARDED_FOR"] ;
+if (isset ($_POST['user_password']) &&!empty($_POST['USER_password'])) {
+    $user_password = md5($_POST['user_password']) ;
 
-$remote_addr = $_SERVER ["REMOTE_ADDR"] ;
+    $filename ='hash.txt' ;
+    $handle = fopen($filename, 'r') ;
+    $file_password = fread($handle, filesize($filename)) ;
 
-if (!empty ($http_client_ip)) {
-    $ip_address = $http_client_ip ;
-
-}else if (!empty ($http_x_forwarded_for)) {
-    $ip_address = $http_x_forwarded_for ;
-
+    if ($user_password==$file_password) {
+        echo 'password is ok!' ;
+    } else {
+        echo 'Incorrect password.' ;
+    }
 } else {
-    $ip_address = $remote_addr ;
+    echo 'please enter a password.' ;
 }
-
-echo $ip_address ;
-
 ?>

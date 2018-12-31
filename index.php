@@ -1,29 +1,20 @@
-<?php 
-$string = 'password';
-$string_harsh =md5 ($tring);
+<?php
+session_start();
 
-echo $string_hash;
-
-<form action ="index.php" method="POST">
-Name <input type="text" name="user_id">
-<br>
-Password <input type="password" name="user_password">
-<input type = "submit" value="submit">
-</form>
-
-if (isset ($_POST['user_password']) &&!empty($_POST['USER_password'])) {
-    $user_password = md5($_POST['user_password']) ;
-
-    $filename ='hash.txt' ;
-    $handle = fopen($filename, 'r') ;
-    $file_password = fread($handle, filesize($filename)) ;
-
-    if ($user_password==$file_password) {
-        echo 'password is ok!' ;
-    } else {
-        echo 'Incorrect password.' ;
-    }
+if(!isset($_POST["secure"])) {
+    $_SESSION["secure" ]= rand(1000,9999);
 } else {
-    echo 'please enter a password.' ;
+    if ($_SESSION["secure"]==$_POST["secure"]) {
+echo "Its a match!"
+    } else {
+        echo "Incorrect match, try again." ;
+        $_SESSION["" rand(1000,9999);
+    }
 }
 ?>
+
+<img src="generate.php" /><br>
+
+<form action="index.php" method="POST">
+Type the Value you see: <input type="text" size="6" name="secure"> <input type="submit" value="submit">
+</form>
